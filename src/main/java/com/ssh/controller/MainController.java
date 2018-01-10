@@ -64,7 +64,7 @@ public class MainController extends BaseController{
 	
 	
 	public static void main(String[] args) {
-		
+		 
 		//声明Connection对象
 		         Connection con;
 		        //驱动程序名
