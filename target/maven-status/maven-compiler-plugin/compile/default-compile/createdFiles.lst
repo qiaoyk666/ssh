@@ -1,0 +1,8 @@
+com\ssh\service\TestService.class
+com\ssh\service\impl\TestServiceImpl.class
+com\ssh\repository\PersonRepository.class
+com\ssh\repository\DomainRepository.class
+com\ssh\service\PersonService.class
+com\ssh\repository\impl\PersonRepositoryImpl.class
+com\ssh\controller\MainController.class
+com\ssh\service\impl\PersonServiceImpl.class
