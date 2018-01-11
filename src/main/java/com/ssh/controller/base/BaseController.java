@@ -5,4 +5,7 @@ import java.util.logging.Logger;
 public class BaseController {
 	public Logger log = Logger.getLogger(BaseController.class.getName());
 
+	
+	
+	//
 }
