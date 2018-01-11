@@ -7,5 +7,5 @@ public class BaseController {
 
 	
 	
-	//²âÊÔ
+	//æµ‹è¯•æ³¨é‡Š
 }
