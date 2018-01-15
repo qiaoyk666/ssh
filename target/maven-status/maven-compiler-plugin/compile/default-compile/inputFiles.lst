@@ -15,6 +15,7 @@ E:\workspace\ssh\src\main\java\com\ssh\entity\person\PersonUpdateReq.java
 E:\workspace\ssh\src\main\java\com\ssh\valid\ValidateParamAspect.java
 E:\workspace\ssh\src\main\java\com\ssh\entity\base\BaseQueryReq.java
 E:\workspace\ssh\src\main\java\com\ssh\entity\base\BaseResp.java
+E:\workspace\ssh\src\main\java\com\ssh\tools\exception\SessionOverTimeException.java
 E:\workspace\ssh\src\main\java\com\ssh\entity\person\QueryPersonByConditionInfo.java
 E:\workspace\ssh\src\main\java\com\ssh\service\PersonService.java
 E:\workspace\ssh\src\main\java\com\ssh\controller\MainController.java

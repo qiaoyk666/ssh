@@ -28,7 +28,7 @@
 			};
 			 $.ajax({ 
 		            type:"POST", 
-		            url:"main/testCache.do",
+		            url:"main/testCache2.do",
 		            dataType:"json",      
 		            contentType:"application/json;charset=UTF-8",               
 		            data:JSON.stringify(saveData),

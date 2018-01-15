@@ -73,32 +73,28 @@ public class MainController extends BaseController{
 	 * @param req
 	 * @return
 	 */
-	@ValidateParam
+//	@ValidateParam
 	@RequestMapping(value = "testCache.do",method = RequestMethod.POST)
-	public @ResponseBody TestCacheResp testCache(@RequestBody TestCacheReq req,HttpServletRequest request){
+	public @ResponseBody TestCacheResp testCache(@RequestBody TestCacheReq req){
+		System.out.println("测试中文1==");
 		TestCacheResp resp = new TestCacheResp();
 		log.info("===============req:" + JSONObject.toJSONString(req));
-		HttpSession session = request.getSession();
-//		session.setAttribute("username", req.getUserName());
-//		session.setAttribute("password", req.getPassword());
-		UserSession.set("username", req.getUserName());
-		UserSession.set("password", req.getPassword());
-		session.setMaxInactiveInterval(20);
-		String username = (String)UserSession.get("username");
-		resp.setUsername(username);
+		UserSession.setSessionData("userName", req.getUserName(), null);
+		String userName = (String)UserSession.getSessionData("userName", null);
+		System.out.println("userName------" + userName);
+		resp.setUsername(userName);
 		log.info("===============resp:" + JSONObject.toJSONString(resp));
 		return resp;
 	}
 	
 	@ValidateParam
 	@RequestMapping(value = "testCache2.do",method = RequestMethod.POST)
-	public @ResponseBody TestCacheResp testCache2(@RequestBody TestCacheReq req,HttpServletRequest request){
+	public @ResponseBody TestCacheResp testCache2(@RequestBody TestCacheReq req){
 		TestCacheResp resp = new TestCacheResp();
 		log.info("===============req:" + JSONObject.toJSONString(req));
-//		request.getSession().setAttribute("username", req.getUserName());
-//		request.getSession().setAttribute("password", req.getPassword());
-		String username = (String)request.getSession().getAttribute("username");
-		resp.setUsername(username);
+//		Object userName = UserSession.getSessionData("userName", null);
+		System.out.println("测试中文2==");
+//		System.out.println("userName---22---" + userName);
 		log.info("===============resp:" + JSONObject.toJSONString(resp));
 		return resp;
 	}
