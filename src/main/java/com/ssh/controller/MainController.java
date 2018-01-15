@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,11 +16,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.ssh.controller.base.BaseController;
+import com.ssh.entity.cache.TestCacheReq;
+import com.ssh.entity.cache.TestCacheResp;
 import com.ssh.entity.person.Person;
 import com.ssh.entity.person.QueryPersonByConditionReq;
 import com.ssh.entity.person.QueryPersonByConditionResp;
 import com.ssh.service.PersonService;
 import com.ssh.service.TestService;
+import com.ssh.tools.session.UserSession;
+import com.ssh.valid.ValidateParam;
 
 @Controller
 @RequestMapping(value="/main/")
@@ -61,25 +68,59 @@ public class MainController extends BaseController{
 		return resp;
 	}
 	
+	/**
+	 * æµ‹è¯•ç¼“å­˜
+	 * @param req
+	 * @return
+	 */
+	@ValidateParam
+	@RequestMapping(value = "testCache.do",method = RequestMethod.POST)
+	public @ResponseBody TestCacheResp testCache(@RequestBody TestCacheReq req,HttpServletRequest request){
+		TestCacheResp resp = new TestCacheResp();
+		log.info("===============req:" + JSONObject.toJSONString(req));
+		HttpSession session = request.getSession();
+//		session.setAttribute("username", req.getUserName());
+//		session.setAttribute("password", req.getPassword());
+		UserSession.set("username", req.getUserName());
+		UserSession.set("password", req.getPassword());
+		session.setMaxInactiveInterval(20);
+		String username = (String)UserSession.get("username");
+		resp.setUsername(username);
+		log.info("===============resp:" + JSONObject.toJSONString(resp));
+		return resp;
+	}
+	
+	@ValidateParam
+	@RequestMapping(value = "testCache2.do",method = RequestMethod.POST)
+	public @ResponseBody TestCacheResp testCache2(@RequestBody TestCacheReq req,HttpServletRequest request){
+		TestCacheResp resp = new TestCacheResp();
+		log.info("===============req:" + JSONObject.toJSONString(req));
+//		request.getSession().setAttribute("username", req.getUserName());
+//		request.getSession().setAttribute("password", req.getPassword());
+		String username = (String)request.getSession().getAttribute("username");
+		resp.setUsername(username);
+		log.info("===============resp:" + JSONObject.toJSONString(resp));
+		return resp;
+	}
 	
 	
 	public static void main(String[] args) {
 		 
-		//ÉùÃ÷Connection¶ÔÏó
+		//ï¿½ï¿½ï¿½ï¿½Connectionï¿½ï¿½ï¿½ï¿½
 		         Connection con;
-		        //Çý¶¯³ÌÐòÃû
+		        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		         String driver = "com.mysql.jdbc.Driver";
-		         //URLÖ¸ÏòÒª·ÃÎÊµÄÊý¾Ý¿âÃûmydata
+		         //URLÖ¸ï¿½ï¿½Òªï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½mydata
 		         String url = "jdbc:mysql://localhost:3306/ssh";
-		         //MySQLÅäÖÃÊ±µÄÓÃ»§Ãû
+		         //MySQLï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½
 		         String user = "root";
-		         //MySQLÅäÖÃÊ±µÄÃÜÂë
+		         //MySQLï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		         String password = "root";
 		         
 		         try {
-					//¼ÓÔØÇý¶¯³ÌÐò
+					//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					  Class.forName(driver);
-					 //1.getConnection()·½·¨£¬Á¬½ÓMySQLÊý¾Ý¿â£¡£¡
+					 //1.getConnection()ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½MySQLï¿½ï¿½ï¿½Ý¿â£¡ï¿½ï¿½
 					  con = DriverManager.getConnection(url,user,password);
 					  System.out.println(con);
 				} catch (ClassNotFoundException e) {

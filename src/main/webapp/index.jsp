@@ -23,13 +23,12 @@
 		//alert("aa");
 		$("#queryByCondition").click(function(){
 			var saveData = {
-				'username':'ssh',
-				'pageNo':2,
-				'pageSize':20
+				'userName':'ssh222',
+				'password':'pass4ssh222'
 			};
 			 $.ajax({ 
 		            type:"POST", 
-		            url:"main/queryPersonByCondition",
+		            url:"main/testCache.do",
 		            dataType:"json",      
 		            contentType:"application/json;charset=UTF-8",               
 		            data:JSON.stringify(saveData),

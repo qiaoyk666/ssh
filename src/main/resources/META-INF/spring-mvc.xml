@@ -15,6 +15,8 @@
 
  	<mvc:annotation-driven/>
  	<context:component-scan base-package="com.ssh"/>
+ 	<!-- 开启切面代理，使得Spring认识@Aspect -->
+	<aop:aspectj-autoproxy/>
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="prefix" value="views/"/>     
