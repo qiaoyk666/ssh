@@ -51,9 +51,9 @@ public class ValidateParamAspect {
 				throw new SessionOverTimeException("2","session超时！！");
 			}
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		} catch (NotFoundException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 		System.out.println("baseResp.resMsg---" + baseResp.getResMesg());
 		return baseResp;
